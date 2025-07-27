@@ -1,0 +1,35 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Afri Psychology - Psicología Profesional</title>
+        <meta name="description" content="Servicios profesionales de psicología, talleres, recursos y comunidad para tu bienestar mental." />
+    </head>
+    <body class="grid min-h-screen grid-rows-[auto_1fr_auto] bg-pattern antialiased">
+        <Header />
+        <main class="flex-1">
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    .bg-pattern {
+        background-color: #f9fafb; /* fallback color */
+        background-image: url('/patterns/topography.svg');
+        background-repeat: repeat;
+        background-size: 150px 150px; /* tamaño más grande para mejor visibilidad */
+        background-attachment: fixed; /* mantiene el patrón fijo al hacer scroll */
+        opacity: 1;
+    }
+</style>

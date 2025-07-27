@@ -1,0 +1,214 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const workshops = [
+    {
+        id: 1,
+        title: "Mindfulness y Reducción del Estrés",
+        description: "Aprende técnicas de mindfulness para reducir el estrés y mejorar tu bienestar mental en este taller intensivo de 4 semanas.",
+        duration: "4 semanas",
+        sessions: "8 sesiones",
+        price: "$120",
+        startDate: "2024-07-15",
+        endDate: "2024-08-12",
+        schedule: "Martes y Jueves 7:00 PM - 8:30 PM",
+        spots: 12,
+        spotsLeft: 5,
+        level: "Principiante",
+        image: "/api/placeholder/400/300",
+        features: [
+            "Técnicas de respiración consciente",
+            "Meditación guiada",
+            "Ejercicios de relajación",
+            "Material de apoyo digital",
+            "Sesión de seguimiento gratuita"
+        ]
+    },
+    {
+        id: 2,
+        title: "Gestión de la Ansiedad",
+        description: "Desarrolla herramientas prácticas para identificar, entender y manejar la ansiedad de manera efectiva.",
+        duration: "6 semanas",
+        sessions: "6 sesiones",
+        price: "$150",
+        startDate: "2024-08-01",
+        endDate: "2024-09-12",
+        schedule: "Miércoles 6:30 PM - 8:00 PM",
+        spots: 10,
+        spotsLeft: 8,
+        level: "Intermedio",
+        image: "/api/placeholder/400/300",
+        features: [
+            "Técnicas cognitivo-conductuales",
+            "Identificación de triggers",
+            "Ejercicios de exposición gradual",
+            "Plan personalizado de manejo",
+            "Grupo de apoyo WhatsApp"
+        ]
+    },
+    {
+        id: 3,
+        title: "Comunicación Asertiva",
+        description: "Mejora tus habilidades de comunicación y aprende a expresar tus necesidades de manera clara y respetuosa.",
+        duration: "3 semanas",
+        sessions: "6 sesiones",
+        price: "$90",
+        startDate: "2024-07-22",
+        endDate: "2024-08-07",
+        schedule: "Lunes y Miércoles 7:30 PM - 9:00 PM",
+        spots: 15,
+        spotsLeft: 10,
+        level: "Principiante",
+        image: "/api/placeholder/400/300",
+        features: [
+            "Técnicas de escucha activa",
+            "Manejo de conflictos",
+            "Práctica en role-play",
+            "Ejercicios de autoafirmación",
+            "Certificado de participación"
+        ]
+    },
+    {
+        id: 4,
+        title: "Autoestima y Confianza Personal",
+        description: "Fortalece tu autoestima y desarrolla una confianza sólida que te permita alcanzar tus metas personales.",
+        duration: "5 semanas",
+        sessions: "10 sesiones",
+        price: "$130",
+        startDate: "2024-08-15",
+        endDate: "2024-09-19",
+        schedule: "Martes y Jueves 6:00 PM - 7:30 PM",
+        spots: 8,
+        spotsLeft: 3,
+        level: "Intermedio",
+        image: "/api/placeholder/400/300",
+        features: [
+            "Identificación de creencias limitantes",
+            "Técnicas de reestructuración cognitiva",
+            "Ejercicios de autocompasión",
+            "Plan de acción personal",
+            "Sesión individual incluida"
+        ]
+    }
+];
+---
+
+<Layout>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-50/90 to-blue-50/90 relative py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Talleres</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Cursos grupales diseñados para desarrollar habilidades específicas y promover tu crecimiento personal
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshops Grid -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-8">
+                {workshops.map(workshop => (
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <img src={workshop.image} alt={workshop.title} class="w-full h-48 object-cover">
+                        
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class={`px-3 py-1 rounded-full text-sm font-medium ${
+                                    workshop.level === 'Principiante' ? 'bg-green-100 text-green-800' :
+                                    workshop.level === 'Intermedio' ? 'bg-yellow-100 text-yellow-800' :
+                                    'bg-red-100 text-red-800'
+                                }`}>
+                                    {workshop.level}
+                                </span>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-blue-950">{workshop.price}</div>
+                                    <div class="text-sm text-gray-500">{workshop.duration}</div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">{workshop.title}</h3>
+                            <p class="text-gray-600 mb-4">{workshop.description}</p>
+
+                            <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+                                <div>
+                                    <span class="font-semibold text-gray-700">Duración:</span>
+                                    <div class="text-gray-600">{workshop.sessions}</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-gray-700">Horario:</span>
+                                    <div class="text-gray-600">{workshop.schedule}</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-gray-700">Inicio:</span>
+                                    <div class="text-gray-600">
+                                        {new Date(workshop.startDate).toLocaleDateString('es-ES', { 
+                                            day: 'numeric', 
+                                            month: 'long',
+                                            year: 'numeric'
+                                        })}
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-gray-700">Cupos:</span>
+                                    <div class={`font-medium ${workshop.spotsLeft <= 3 ? 'text-red-600' : 'text-green-600'}`}>
+                                        {workshop.spotsLeft} disponibles
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <h4 class="font-semibold text-gray-900 mb-2">¿Qué incluye?</h4>
+                                <ul class="space-y-1">
+                                    {workshop.features.map(feature => (
+                                        <li class="flex items-center text-sm text-gray-600">
+                                            <svg class="w-4 h-4 text-blue-950 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <button class="flex-1 bg-blue-950 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors">
+                                    Inscribirse
+                                </button>
+                                <button class="px-6 py-3 border border-blue-950 text-blue-950 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                                    Más info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Preguntas Frecuentes</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg p-6 shadow-sm">
+                    <h3 class="font-semibold text-gray-900 mb-2">¿Qué pasa si no puedo asistir a una sesión?</h3>
+                    <p class="text-gray-600">Todas las sesiones son grabadas y tendrás acceso a la grabación por 30 días. Además, puedes recuperar la sesión en el siguiente grupo.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-sm">
+                    <h3 class="font-semibold text-gray-900 mb-2">¿Hay descuentos disponibles?</h3>
+                    <p class="text-gray-600">Ofrecemos 15% de descuento para estudiantes y 20% si te inscribes a dos talleres simultáneamente.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-sm">
+                    <h3 class="font-semibold text-gray-900 mb-2">¿Los talleres reemplazan la terapia individual?</h3>
+                    <p class="text-gray-600">Los talleres son complementarios a la terapia individual, no un reemplazo. Son excelentes para aprender herramientas específicas en un ambiente grupal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

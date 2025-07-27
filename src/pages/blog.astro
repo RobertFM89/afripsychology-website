@@ -1,0 +1,188 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Mock data para el blog - más adelante puedes usar Astro Content Collections
+const blogPosts = [
+    {
+        id: 1,
+        title: "5 Estrategias Efectivas para Manejar el Estrés Diario",
+        excerpt: "Descubre técnicas probadas que te ayudarán a reducir el estrés y mejorar tu calidad de vida de manera sostenible.",
+        date: "2024-05-15",
+        category: "Bienestar",
+        readTime: "5 min",
+        image: "/api/placeholder/400/250",
+        slug: "estrategias-manejar-estres"
+    },
+    {
+        id: 2,
+        title: "La Importancia de la Autocompasión en el Crecimiento Personal",
+        excerpt: "Aprende por qué ser amable contigo mismo es fundamental para tu desarrollo personal y bienestar emocional.",
+        date: "2024-05-10",
+        category: "Autoestima",
+        readTime: "7 min",
+        image: "/api/placeholder/400/250",
+        slug: "autocompasion-crecimiento-personal"
+    },
+    {
+        id: 3,
+        title: "Cómo Establecer Límites Saludables en tus Relaciones",
+        excerpt: "Una guía práctica para aprender a decir 'no' y proteger tu bienestar emocional en todas tus relaciones.",
+        date: "2024-05-05",
+        category: "Relaciones",
+        readTime: "6 min",
+        image: "/api/placeholder/400/250",
+        slug: "limites-saludables-relaciones"
+    },
+    {
+        id: 4,
+        title: "Mindfulness para Principiantes: Tu Primer Paso hacia la Calma",
+        excerpt: "Introducción práctica al mindfulness con ejercicios simples que puedes hacer en cualquier momento del día.",
+        date: "2024-04-28",
+        category: "Mindfulness",
+        readTime: "8 min",
+        image: "/api/placeholder/400/250",
+        slug: "mindfulness-principiantes"
+    },
+    {
+        id: 5,
+        title: "Señales de que Necesitas Ayuda Profesional",
+        excerpt: "Conoce las señales importantes que indican cuándo es momento de buscar apoyo psicológico profesional.",
+        date: "2024-04-20",
+        category: "Salud Mental",
+        readTime: "4 min",
+        image: "/api/placeholder/400/250",
+        slug: "cuando-buscar-ayuda-profesional"
+    },
+    {
+        id: 6,
+        title: "Técnicas de Respiración para la Ansiedad",
+        excerpt: "Ejercicios de respiración que puedes usar inmediatamente para controlar momentos de ansiedad aguda.",
+        date: "2024-04-15",
+        category: "Ansiedad",
+        readTime: "5 min",
+        image: "/api/placeholder/400/250",
+        slug: "tecnicas-respiracion-ansiedad"
+    }
+];
+
+const categories = [...new Set(blogPosts.map(post => post.category))];
+---
+
+<Layout>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-50/90 to-blue-50/90 relative py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Blog</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Reflexiones, consejos y herramientas para tu bienestar mental
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Filter -->
+    <section class="py-8 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="category-filter active bg-blue-950 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-900 transition-colors" data-category="all">
+                    Todas las categorías
+                </button>
+                {categories.map(category => (
+                    <button class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-300 transition-colors" data-category={category}>
+                        {category}
+                    </button>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {blogPosts.map(post => (
+                    <article class="blog-post bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" data-category={post.category}>
+                        <img src={post.image} alt={post.title} class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-100 text-blue-950 text-xs font-medium px-2.5 py-0.5 rounded">
+                                    {post.category}
+                                </span>
+                                <span class="text-gray-500 text-sm">{post.readTime}</span>
+                            </div>
+                            <h2 class="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
+                                <a href={`/blog/${post.slug}`} class="hover:text-blue-900 transition-colors">
+                                    {post.title}
+                                </a>
+                            </h2>
+                            <p class="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                            <div class="flex items-center justify-between">
+                                <time class="text-gray-500 text-sm">
+                                    {new Date(post.date).toLocaleDateString('es-ES', { 
+                                        year: 'numeric', 
+                                        month: 'long', 
+                                        day: 'numeric' 
+                                    })}
+                                </time>
+                                <a href={`/blog/${post.slug}`} class="text-blue-950 hover:text-blue-900 font-medium text-sm">
+                                    Leer más →
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Subscribe -->
+    <section class="bg-blue-950/95 py-16 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">¿No te quieres perder ningún artículo?</h2>
+            <p class="text-xl text-blue-100 mb-8">Suscríbete a nuestro newsletter y recibe contenido exclusivo</p>
+            <form class="max-w-md mx-auto flex gap-4">
+                <input 
+                    type="email" 
+                    placeholder="Tu email" 
+                    class="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white focus:outline-none"
+                    required
+                >
+                <button type="submit" class="bg-white text-blue-950 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Suscribirse
+                </button>
+            </form>
+        </div>
+    </section>
+</Layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        const blogPosts = document.querySelectorAll('.blog-post');
+
+        categoryFilters.forEach(filter => {
+            filter.addEventListener('click', function(this: HTMLElement) {
+                const category = this.getAttribute('data-category');
+                
+                // Update active filter
+                categoryFilters.forEach(f => {
+                    f.classList.remove('active', 'bg-blue-950', 'text-white');
+                    f.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                this.classList.add('active', 'bg-blue-950', 'text-white');
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+
+                // Filter posts
+                blogPosts.forEach(post => {
+                    const htmlPost = post as HTMLElement;
+                    if (category === 'all' || post.getAttribute('data-category') === category) {
+                        htmlPost.style.display = 'block';
+                    } else {
+                        htmlPost.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>

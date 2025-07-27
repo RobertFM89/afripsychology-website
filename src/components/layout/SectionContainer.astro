@@ -1,0 +1,23 @@
+---
+type Props = {
+	class?: string;
+	fullWidth?: boolean;
+};
+
+import { cn } from "../../utils/cn.ts";
+const { class: className } = Astro.props;
+---
+
+<section
+	class={cn("bg-white px-5", className, {
+		"px-0": Astro.props.fullWidth,
+	})}
+>
+	<div
+		class={cn("mx-auto max-w-7xl", className, {
+			"max-w-full": Astro.props.fullWidth,
+		})}
+	>
+		<slot />
+	</div>
+</section>
