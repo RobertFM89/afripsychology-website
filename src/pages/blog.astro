@@ -24,16 +24,6 @@ const blogPosts = [
         slug: "autocompasion-crecimiento-personal"
     },
     {
-        id: 3,
-        title: "Cómo Establecer Límites Saludables en tus Relaciones",
-        excerpt: "Una guía práctica para aprender a decir 'no' y proteger tu bienestar emocional en todas tus relaciones.",
-        date: "2024-05-05",
-        category: "Relaciones",
-        readTime: "6 min",
-        image: "/api/placeholder/400/250",
-        slug: "limites-saludables-relaciones"
-    },
-    {
         id: 4,
         title: "Mindfulness para Principiantes: Tu Primer Paso hacia la Calma",
         excerpt: "Introducción práctica al mindfulness con ejercicios simples que puedes hacer en cualquier momento del día.",
@@ -82,16 +72,16 @@ const categories = [...new Set(blogPosts.map(post => post.category))];
     </section>
 
     <!-- Categories Filter -->
-    <section class="py-4 sm:py-8 bg-white">
-        <div class="w-full overflow-hidden">
+    <section class="py-4 sm:py-8 bg-white mx-auto">
+        <div class="max-w-4xl overflow-hidden mx-auto">
             <div class="px-3 sm:px-6 lg:px-8">
                 <div class="overflow-x-auto scrollbar-hide">
-                    <div class="flex gap-2 pb-2 min-w-max">
-                        <button class="category-filter active bg-blue-950 text-white px-3 py-2 rounded-full text-sm font-medium hover:bg-blue-900 transition-colors whitespace-nowrap flex-shrink-0" data-category="all">
+                    <div class="grid grid-cols-3 md:grid-cols-6 gap-4 pb-2 min-w-max mx-auto">
+                        <button class="category-filter active bg-blue-950 text-white px-3 py-2 rounded-full text-sm font-medium hover:bg-blue-900 transition-colors" data-category="all">
                             Todas
                         </button>
                         {categories.map(category => (
-                            <button class="category-filter bg-gray-200 text-gray-700 px-3 py-2 rounded-full text-sm font-medium hover:bg-gray-300 transition-colors whitespace-nowrap flex-shrink-0" data-category={category}>
+                            <button class="category-filter bg-gray-200 text-gray-700 px-3 py-2 rounded-full text-sm font-medium hover:bg-gray-300 transition-colors" data-category={category}>
                                 {category}
                             </button>
                         ))}
